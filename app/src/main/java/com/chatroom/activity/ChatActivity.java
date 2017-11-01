@@ -39,7 +39,7 @@ import java.util.Map;
  * Created by asus on 2017/10/8.
  */
 
-public class ChatActivity extends Activity implements OnClickListener{
+public class ChatActivity extends Activity implements OnClickListener,MyView{
 
     private TextView myTitle;
     private ListView myListView ;
@@ -56,15 +56,15 @@ public class ChatActivity extends Activity implements OnClickListener{
         setContentView(R.layout.activity_chat);
 
         SysApplication.getInstance().addActivity(this);//加入到列表中
-
-        receiveListen();//开启线程
-        initView();
         Intent intent = getIntent();
         str = intent.getStringExtra("name");
         sex = intent.getStringExtra("sex");
+        receiveListen();//开启线程
+        initView();
+
     }
     private void receiveListen() {
-        Thread thread = new Thread(new Listener(8080,myHandler,str));//接收8080端口的接收信息
+        Thread thread = new Thread(new Listener(this,8080,myHandler,str));//接收8080端口的接收信息
         thread.start();
     }
     private void initView() {
@@ -137,6 +137,19 @@ public class ChatActivity extends Activity implements OnClickListener{
         }
 
     };
+
+    @Override
+    public void showData(final List<Map<String, String>> data1) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                data = data1;
+                Message msg = new Message();
+                msg.what = 0;
+                myHandler.sendMessage(msg);
+            }
+        });
+    }
 
     /**
      * 监听端口类
