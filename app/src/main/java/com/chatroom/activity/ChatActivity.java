@@ -1,9 +1,7 @@
 package com.chatroom.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +24,6 @@ import android.widget.Toast;
 import com.chatroom.R;
 import com.chatroom.presenter.Listener;
 import com.chatroom.presenter.SendMsg;
-import com.chatroom.util.SysApplication;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +52,7 @@ public class ChatActivity extends Activity implements OnClickListener,MyView{
         requestWindowFeature(Window.FEATURE_NO_TITLE); //设置无标题
         setContentView(R.layout.activity_chat);
 
-        SysApplication.getInstance().addActivity(this);//加入到列表中
+        //SysApplication.getInstance().addActivity(this);//加入到列表中
         Intent intent = getIntent();
         str = intent.getStringExtra("name");
         sex = intent.getStringExtra("sex");
@@ -296,18 +293,37 @@ public class ChatActivity extends Activity implements OnClickListener,MyView{
      */
     public void leave()
     {
-        AlertDialog.Builder dialog=new AlertDialog.Builder(ChatActivity.this);
-        dialog.setTitle("您真的要离开吗？").setPositiveButton("退出", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SysApplication.getInstance().exit();
-            }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//        AlertDialog.Builder dialog=new AlertDialog.Builder(ChatActivity.this);
+//        dialog.setTitle("您真的要离开吗？").setPositiveButton("退出", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                SysApplication.getInstance().exit();
+//            }
+//        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();//取消弹出框
+//            }
+//        }).create().show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+//        builder.setTitle("提示");
+//        builder.setMessage("退出聊天室？");
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                SysApplication.getInstance().exit();
+//            }
+//        })
+//        .setNegativeButton("取消",new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();//取消弹出框
+//            }
+//        });
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
 
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();//取消弹出框
-            }
-        }).create().show();
+        finish();
     }
 
     /**存放控件*/

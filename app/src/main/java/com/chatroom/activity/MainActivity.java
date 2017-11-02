@@ -13,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.chatroom.R;
-import com.chatroom.util.SysApplication;
 
 /**
  * Created by asus on 2017/10/8.
@@ -65,6 +64,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				}
 
 				startActivity(intent);
+				finish();
 				break;
 			case R.id.rbtn_male:
 				male.setChecked(true);
